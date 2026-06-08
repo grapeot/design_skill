@@ -22,6 +22,10 @@
 - Added `frontend_design.md` as an on-demand sub-skill for distinctive Web/frontend aesthetic direction, adapted from Anthropic's Frontend Design Plugin spirit while preserving the root skill's evaluation-first flow.
 - Updated README, AGENTS, RFC, and root skill routing to reflect the new sub-skill.
 
+--- 2026-06-08 (later)
+
+- Folded selected product-designer practitioner judgments into the public skill family without exposing internal persona machinery: work-class framing, success criteria triangulation, reference discipline, deletion pressure, hidden implementation surface, validation signals, critique layering, and design-system governance.
+
 ## Lessons Learned
 
 _(to be populated as the skill is used in real tasks)_
