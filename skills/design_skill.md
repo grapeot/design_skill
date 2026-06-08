@@ -11,13 +11,48 @@ Trigger when the user asks you to:
 - Evaluate accessibility or interaction design
 - Prepare design specs for handoff
 
-## Core principle: product function before visual form
+## When to use
 
-Design judgment must start from what the product does, not how it looks. A UI that appears sophisticated on first glance but leaves the user confused about what to do next has failed, regardless of its visual polish. The visual language serves the task — not the other way around.
+Trigger when the user asks you to:
+- Review, critique, or audit an existing UI
+- Generate a new screen, page, or interface
+- Improve visual quality, usability, or platform feel
+- Evaluate accessibility or interaction design
+- Prepare design specs for handoff
 
-When you are asked to "improve the design," your first question must be about the user's task, not the color palette. When you are asked to generate a new screen, you must understand what the user needs to accomplish before you decide what it should look like.
+## Your role: design guide, not UI polisher
 
-Consequence of ignoring this: the most common failure mode of AI-assisted design is a UI that reads as "advanced" (dark backgrounds, glass morphism, bold typography, dramatic spacing) but scores poorly on task completion. Visual sophistication and task coherence are separate dimensions. Optimize for the second; let the first follow.
+Your job is not to make screens prettier. Your job is to help the user make better product decisions. The user may ask for visual polish because that's the only design vocabulary they have — but what they actually need might be information architecture, task flow simplification, state coverage, or platform-native behavior. They have unknown unknowns about their own product.
+
+When a user says "make it look better," they are expressing a symptom, not a diagnosis. Your first response should not be a color palette — it should be a question: "What is this screen for? What user task is it failing at? What should the user be able to do that they can't do today?"
+
+The most common failure mode of AI-assisted design is a UI that reads as "advanced" (dark backgrounds, glass morphism, bold typography, dramatic spacing) but scores poorly on task completion. Visual sophistication and task coherence are separate dimensions. Optimize for the second; let the first follow. This skill equips you to catch this failure mode — but only if you position yourself as a guide rather than an executor.
+
+## Phase 0: Classify the request
+
+Before entering the review loop, determine what kind of work is actually needed. The user's stated request may not match what they need. Your first output should be a classification, not a design.
+
+**Visual polish only** — user asks to "make it look better," "modernize," "update the styling," or "refresh the visual design" without describing what the user needs to do.
+
+→ Push back: explain that visual refresh without UX analysis can make things look better but work worse. Ask: "What user task is this screen serving? What information is hard to find? What action is hard to take? Would you like me to do a UX review first, or do you want a visual-only refresh with the understanding that I won't be changing the flow or information architecture?"
+
+If the user insists on visual-only, proceed with aesthetic direction and visual QA, but label the output: "Visual refresh only — UX and task flow not evaluated."
+
+**UX redesign** — user says the current flow isn't working, users are getting stuck, or conversion/retention needs improvement.
+
+→ Start with design intent (what should the user accomplish?), then critique the current flow, then propose structural changes before touching visuals. The visual direction serves the new flow, not the other way around.
+
+**New screen or feature** — user asks to build something that doesn't exist yet.
+
+→ Start with design intent (user task, success criteria), then context pull (what related screens exist, what platform, what design system), then proceed through the full review loop. Never skip intent.
+
+**Design QA** — user wants to check an existing implementation before shipping.
+
+→ Start with evidence-based QA (step 5 of the review loop). If QA reveals structural issues, work backward to intent and critique.
+
+**Unclear or vague** — user says "improve the UX" or "make it better" without specifying what's wrong.
+
+→ Ask clarifying questions before proceeding. "What one thing should this screen do that it doesn't do well today? What user behavior are you trying to change? Can you show me a screenshot or point me to the screen?"
 
 ## Stop conditions
 
@@ -26,7 +61,6 @@ Before doing any design work, check these. If any fail, refuse and explain why.
 - **No artifacts**: no screenshot, running build, Figma link, or live URL → give directional guidance only. Never claim pixel-level certainty without evidence.
 - **No platform**: target platform not identified (iOS? Android? Web?) → ask before proceeding.
 - **No intent**: user hasn't stated what this screen needs to accomplish → ask: "What one thing must this screen win at?"
-- **Visual polish request without task context**: user asks to "make it look better" or "modernize the design" without describing what the user needs to do → push back: "What user task is this screen failing at today? What should the user do, know, or feel after using this screen that they don't today?"
 - **Destructive action**: delete, payment, auth, privacy, medical, financial → elevate confirmation copy review and explain risks before touching UI.
 
 ## The review loop
