@@ -2,7 +2,7 @@
 
 ## Overview
 
-This RFC describes the architecture of `design_skill` — a single-file, filesystem-native skill for UI design judgment in AI coding agents. The skill is designed to work as a loose Markdown file with no runtime dependencies, no plugin system, and no vendor lock-in.
+This RFC describes the architecture of `design_skill` — a filesystem-native skill family for UI design judgment in AI coding agents. The skill is designed to work as loose Markdown files with no runtime dependencies, no plugin system, and no vendor lock-in.
 
 ## Design Principles
 
@@ -35,9 +35,10 @@ When tools are unavailable (no Xcode, no Android SDK, no browser automation), th
 ```
 design_skill/
 └── skills/
-    ├── design_skill.md     ← root skill (~190 lines, consumed at runtime)
+    ├── design_skill.md     ← root skill (~240 lines, consumed at runtime)
     ├── design_critique.md   ← sub-skill: structured critique reference
-    └── design_system.md     ← sub-skill: design system audit reference
+    ├── design_system.md     ← sub-skill: design system audit reference
+    └── frontend_design.md   ← sub-skill: Web/frontend aesthetic direction
 ```
 
 The skill file has these sections:
@@ -48,7 +49,7 @@ The skill file has these sections:
 4. **Stop conditions** — when to refuse or degrade
 5. **The design review loop** — the six-step cycle
 6. **UX Copy** — inline rubric for CTAs, errors, empty states, confirmation dialogs, tone
-7. **Related sub-skills** — pointers to design_critique.md and design_system.md
+7. **Related sub-skills** — pointers to design_critique.md, design_system.md, and frontend_design.md
 8. **Platform routing** — how to find and load platform-specific rules
 9. **Quality gates** — what must be true before the agent can claim "done"
 
@@ -143,7 +144,13 @@ Candidates for future sub-skills, in priority order:
 
 **Chosen: single root with on-demand sub-skills.** The root skill (~220 lines) defines the agent role, Phase 0 request classifier, review loop, stop conditions, UX copy rubric, platform routing, and quality gates. Specialized judgment frameworks (design critique, design system audit) live as separate plain-text reference files loaded on demand. This keeps the root skill focused while allowing sub-skills to provide depth when needed.
 
-Sub-skills were extracted when the judgment dimension had clear scope boundaries and enough content (~50 lines) to noticeably pollute the root skill. The extraction is conservative: only two sub-skills exist (critique and design system), and they are plain-text files — not secondary entry points. The root skill explicitly lists when to load each one.
+Sub-skills are extracted when the judgment dimension has clear scope boundaries and enough content to noticeably pollute the root skill. The extraction is conservative: critique, design system audit, and frontend aesthetic direction are plain-text files, not secondary entry points. The root skill explicitly lists when to load each one.
+
+### Installation model
+
+**Chosen: install the repo or complete `skills/` directory, expose only the root skill.** Earlier installation guidance treated `skills/design_skill.md` as a standalone file that could be symlinked globally. That no longer matches the architecture: the root skill now routes to sibling sub-skills, so a single-file symlink can strand the references.
+
+Installers should clone or vendor the repository in a stable location, then add the root skill to the workspace discovery chain. If the target system requires copying files into a skills directory, copy the complete `skills/` directory and expose only `design_skill.md` in any global index. Do not symlink every sub-skill globally; the root skill owns routing.
 
 ### Platform-agnostic vs platform-specific
 

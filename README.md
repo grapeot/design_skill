@@ -4,7 +4,7 @@ A structured UI design judgment skill for AI coding agents. Teaches agents how t
 
 ## What this is
 
-A single Markdown skill file that gives AI coding agents a design review loop: define what success looks like before generating UI, verify with real artifacts (screenshots, builds, accessibility scans) after implementation, and capture reusable design lessons over time.
+A small Markdown skill family that gives AI coding agents a design review loop: define what success looks like before generating UI, verify with real artifacts (screenshots, builds, accessibility scans) after implementation, and capture reusable design lessons over time. The root skill routes to focused sub-skills for critique, design-system audit, and frontend aesthetic direction.
 
 ## What this is not
 
@@ -31,29 +31,32 @@ Key differences from Anthropic's approach:
 | Figma/Web-centric | iOS, Android, Web |
 | Requires plugin runtime (`~~connector` placeholders) | Filesystem-native (paths, not placeholders) |
 | Designed for team design workflow | Designed for solo builder + AI agent |
-| Six separate SKILL.md files | Single root skill; platform rules loaded on demand |
+| Six separate SKILL.md files | Root router skill; focused sub-skills loaded on demand |
 | Anthropic-exclusive tool ecosystem | Tool-agnostic; references existing platform CLI/XCTest/Playwright |
 
 ## Installation
 
-This is a loose Markdown-based skill. To use it, copy `skills/design_skill.md` into your AI coding tool's skills directory, or symlink it.
+This is a loose Markdown-based skill family. Install the repository or copy the whole `skills/` directory so the root skill can resolve its sub-skills.
 
 ### For OpenCode / Claude Code / Codex / Cursor
 
 Tell your AI agent:
 
-> Install the design_skill from https://github.com/grapeot/design_skill — read skills/design_skill.md, symlink it into my workspace's rules/skills/ directory, and update the skills INDEX if one exists.
+> Install the design_skill from https://github.com/grapeot/design_skill — add the repo or its complete `skills/` directory to my workspace's skill discovery chain, expose `skills/design_skill.md` as the root entry, and update the skills INDEX if one exists.
 
 The agent should:
-1. Clone or reference the repo
-2. Add the skill path to the workspace discovery chain (INDEX.md, AGENTS.md, or CLAUDE.md)
-3. Not copy the skill inline — keep it as a referenced file for easy updates
+1. Clone or vendor the repo in a stable location
+2. Add only the root skill (`skills/design_skill.md`) to the workspace discovery chain (INDEX.md, AGENTS.md, or CLAUDE.md)
+3. Keep the sub-skills beside the root skill so relative references like `frontend_design.md` resolve
+4. Avoid symlinking only `skills/design_skill.md`; that breaks the multi-file skill family
+5. Avoid exposing every sub-skill globally; the root skill is the router
 
 ## Project Structure
 
 - `skills/design_skill.md` — root skill (the primary artifact)
 - `skills/design_critique.md` — sub-skill: structured design critique reference
 - `skills/design_system.md` — sub-skill: design system audit reference
+- `skills/frontend_design.md` — sub-skill: distinctive Web/frontend aesthetic direction
 - `docs/prd.md` — product requirements and design rationale
 - `docs/rfc.md` — architecture, design decisions, trade-offs
 - `docs/working.md` — changelog and lessons learned

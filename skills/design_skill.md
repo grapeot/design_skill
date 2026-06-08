@@ -6,10 +6,12 @@ Give AI coding agents a structured framework for evaluating, critiquing, and imp
 
 Trigger when the user asks you to:
 - Review, critique, or audit an existing UI
-- Generate a new screen, page, or interface
+- Generate a new screen, page, Web component, or interface
 - Improve visual quality, usability, or platform feel
 - Evaluate accessibility or interaction design
 - Prepare design specs for handoff
+
+For Web/frontend generation or substantial visual rewrites, first complete design intent and context pull here, then load `frontend_design.md` before coding. That sub-skill handles distinctive aesthetic direction, frontend execution details, and Web production gates.
 
 ## Your role: design guide, not UI polisher
 
@@ -98,6 +100,8 @@ Turn this into concrete design pressure. If a user must guess three or more rule
 ### 4. Aesthetic direction
 
 Do not default to the AI mean (Inter, purple gradients, centered hero, card grid, white background). Pick a conceptual direction that serves the product intent, then make every visual choice serve it.
+
+If this is a Web/frontend implementation task, load `frontend_design.md` at this step. Use it to turn the broad conceptual direction into concrete choices for typography, color, motion, spatial composition, background detail, and responsive production checks.
 
 **Avoid the "advanced UI" consensus.** AI design tools have a recognizable default aesthetic: dark backgrounds with glass morphism, bold oversized typography, dramatic spacing, high-contrast accent colors. This reads as sophisticated on first impression, and an AI agent left to its own defaults will reliably produce it. Do not mistake this for good design. This aesthetic is a local maximum — it reliably sacrifices information density, task clarity, platform native feel, and accessibility for visual impact. A recording app dressed in this style looks like a tech demo, not a tool you'd trust with your data.
 
@@ -198,6 +202,7 @@ These files extend the root skill with specialized judgment frameworks. Load the
 
 - `design_critique.md` — structured design critique with severity-graded findings. Load when the user asks for a detailed design review or when the root skill's QA step reveals issues needing deeper analysis.
 - `design_system.md` — design system audit (token coverage, component states, naming consistency, hardcoded values). Load when the user asks to check design system compliance or when refactoring visual consistency across screens.
+- `frontend_design.md` — Web/frontend aesthetic direction and production gates. Load when generating or substantially changing browser-based UI and the task needs distinctive visual execution beyond platform heuristics.
 
 ## Platform routing
 
