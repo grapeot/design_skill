@@ -26,6 +26,12 @@ Pick a direction with enough force to prevent regression to the mean. Examples: 
 
 The point is not intensity. Bold maximalism and refined minimalism can both work. The point is commitment: every type, color, motion, spacing, and background decision should belong to the same idea.
 
+## Reference discipline
+
+References are constraint-output pairs, not screenshots to imitate. Before making something "like" another product, name the source product's native constraint, the user habit or workflow it relies on, and the part that transfers to this product. If the source constraint does not exist here, the visual language is probably aspiration rather than design evidence.
+
+Use references to borrow mental models, interaction primitives, density choices, and tradeoff reasoning. Do not borrow a surface style just because it looks mature. AI-generated references are especially weak evidence because they usually lack provenance; treat them as prompts for discrimination, not proof of taste.
+
 ## Avoid consensus frontend
 
 Never default to the common AI frontend bundle:
@@ -72,10 +78,12 @@ Maximalist concepts need enough code to deliver the idea: layered composition, a
 Before handing off frontend work, verify:
 
 - The implemented screen has a named conceptual direction
+- The direction names a product principle or constraint, not just a style label
 - Typography, color, motion, composition, and background details all support that direction
 - The UI works at mobile and desktop breakpoints
 - Focus states, keyboard navigation, semantic HTML, and contrast were checked
 - Reduced motion is respected when motion exists
+- AI-generated surfaces, components, or copy were treated as provisional until reviewed against product intent, accessibility, brand/context fit, and hidden implementation cost
 - There is at least one screenshot or running artifact behind the judgment
 
 If these gates are not met, label the result as a prototype or directional draft, not production-grade frontend.

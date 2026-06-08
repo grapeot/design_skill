@@ -25,6 +25,14 @@ The most common failure mode of AI-assisted design is a UI that reads as "advanc
 
 Before entering the review loop, determine what kind of work is actually needed. The user's stated request may not match what they need. Your first output should be a classification, not a design.
 
+First classify the work itself:
+
+- **Discovery**: the problem or user need is not validated yet. Do not jump to screens; identify the riskiest assumption and what evidence would validate it.
+- **Delivery**: the problem is known and the task is to produce a production-ready artifact. Optimize for execution quality, state coverage, and handoff clarity.
+- **Maintenance**: the task changes an existing product, design system, or brand surface. Protect existing user habits, downstream dependencies, adoption, and migration paths.
+
+If the request says "refresh," "redesign," "make it like X," or "add this," treat the label as a hypothesis. Diagnose the work class before accepting the requested artifact.
+
 **Visual polish only** — user asks to "make it look better," "modernize," "update the styling," or "refresh the visual design" without describing what the user needs to do.
 
 → Push back: explain that visual refresh without UX analysis can make things look better but work worse. Ask: "What user task is this screen serving? What information is hard to find? What action is hard to take? Would you like me to do a UX review first, or do you want a visual-only refresh with the understanding that I won't be changing the flow or information architecture?"
@@ -71,6 +79,14 @@ Before looking at any UI, state what success means for this specific task. Exact
 Not: "make it look modern" or "improve the UX." Those aren't goals — they're symptoms of not having one. Not: "create a beautiful landing page." Beauty is not an outcome; it is a byproduct of coherent choices serving a clear function.
 
 If you cannot articulate the intent, do not proceed. An AI tool given only visual instructions will optimize for visual impact at the expense of function — the most common failure mode in AI-assisted design.
+
+Then triangulate success across three frames:
+
+- **User outcome**: what task, confidence, comprehension, or recovery improves for the user
+- **Business outcome**: what activation, conversion, retention, trust, support-load, or adoption signal matters
+- **Feasibility constraint**: what implementation, accessibility, performance, operational, or design-system constraint must hold
+
+If only one frame is named, label it as incomplete. A good design can fail by being user-pleasing but non-viable, business-effective but trust-damaging, or easy to build but irrelevant.
 
 ### 2. Context pull
 
@@ -122,6 +138,8 @@ The direction still has two parts:
 
 This is not about being creative. It's about preventing regression to the mean. The model's default instinct is consensus design. The direction is the reason not to take the default.
 
+If borrowing from another product, decompose the reference before using it. Ask what constraint produced that pattern, what user habit or workflow makes it work, and whether that condition exists here. Borrow mental models and constraints, not screenshots.
+
 ### 5. Implementation contract
 
 Only needed when you are writing code. Before generating UI code, write a lightweight contract covering:
@@ -139,6 +157,7 @@ Only needed when you are writing code. Before generating UI code, write a lightw
 - **Use tokens, not values.** Reference design tokens (colors, spacing, typography) rather than hardcoded values. This keeps the contract consistent with the design system and enables automated QA.
 - **Show all states.** Default is not enough. Cover hover, active, disabled, loading, error, empty, and long-text states for every interactive component.
 - **Describe the why.** "This collapses on mobile because users primarily use one-handed" helps downstream agents make good judgment calls when adapting the design.
+- **Estimate hidden implementation surface.** Visible size is a poor cost proxy. Call out new states, dependencies, input modes, performance requirements, accessibility obligations, QA matrix, ownership boundaries, and release risk.
 
 This contract is the yardstick you'll use in QA. If you skip it, QA has nothing to measure against.
 
@@ -158,6 +177,8 @@ After implementation (or when reviewing existing UI), produce real evidence:
 
 **Task coherence.** Does every visual choice serve the design intent, or are there elements that look good but don't help the user? Decorative elements that survive QA but don't advance the task are the residue of AI consensus design — remove them.
 
+**Deletion pressure.** Every added element needs a reason to survive. Ask: what would users complain about within seven days if this were removed? What could disappear for a month without anyone noticing? What is the cheapest thing to kill while preserving the intent? Simplicity is not fewer pixels; it is less unsupported responsibility.
+
 **Platform native feel.** Does this screen feel like it belongs on its platform, or does it feel like a WebView pretending to be native? On iOS, does it respect the navigation bar, swipe-back, and Dynamic Type? On Android, does it respect the back gesture, system bars, and density? On Web, does it handle keyboard navigation, focus order, and responsive breakpoints correctly?
 
 Tools that can be used: `xcrun simctl screenshot`, `adb shell screencap`, Playwright, axe-core, Lighthouse, Accessibility Inspector, manual visual inspection.
@@ -175,6 +196,8 @@ After the task, write down one reusable design judgment learned or reinforced. F
 Example: "Empty states that say 'No items yet' without explaining what an item is or how to create one leave the user stuck. Always include a creation path."
 
 Accumulate these in `docs/working.md` or `rules/design/anti_examples.md`.
+
+For shipped or soon-to-ship changes, also name the validation plan: one leading signal that can steer iteration quickly, one lagging signal that validates impact, and one reversal threshold that would justify rollback, redesign, or removal. If no signal can change the team's mind, label the change as taste-driven or stakeholder-driven rather than evidence-driven.
 
 ## UX Copy
 

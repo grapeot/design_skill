@@ -20,6 +20,16 @@ Loaded on demand from the root `design_skill.md`. Not intended to be loaded stan
 
 Follow this sequence. Each dimension builds on the previous one.
 
+### 0. Layer the feedback
+
+Before judging details, separate critique into three layers:
+
+- **Intent**: is this solving the right problem for the right user and context?
+- **Execution**: given the intent, does this artifact achieve it?
+- **Preference**: does someone like or dislike a choice independent of the intent?
+
+Do not let preference masquerade as a requirement. Translate reactions like "I don't like this" or "make the button bigger" into the problem they may be pointing at before recommending changes.
+
 ### 1. First impression (2 seconds)
 
 What draws the eye first? Is it the primary task element, or chrome and decoration? Is the screen's purpose immediately readable? The first-glance focal point must match what matters most for the user's task. If it doesn't, the hierarchy is wrong regardless of how polished the individual elements look.
@@ -60,6 +70,11 @@ Minimum checks: color contrast ratios (4.5:1 for normal text, 3:1 for large), to
 | Finding | Severity | Recommendation |
 |---------|----------|----------------|
 | [Specific issue] | 🔴 Critical / 🟡 Moderate / 🟢 Minor | [Specific fix] |
+
+### Feedback layers
+| Feedback | Layer | Interpretation |
+|----------|-------|----------------|
+| [Raw reaction or issue] | Intent / Execution / Preference | [What problem this points to] |
 
 ### Visual hierarchy
 - **First focal point**: [element] — [correct or not?]

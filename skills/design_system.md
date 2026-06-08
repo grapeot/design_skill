@@ -20,6 +20,15 @@ Loaded on demand from the root `design_skill.md`. Not intended to be loaded stan
 
 ## Audit dimensions
 
+### 0. System vs one-off decision
+
+Componentization is a public API decision, not a cleanup instinct. Before recommending a new shared component or token, verify both conditions:
+
+- **Reuse demand**: recurrence is observed across real product surfaces, not forecast from visual similarity
+- **Governance budget**: the team can document, version, test, migrate, support, and eventually deprecate the primitive
+
+If either condition is missing, recommend a tracked one-off or snowflake path first. Local work is often the honest choice while the pattern is still unproven.
+
 ### 1. Token coverage
 
 Check whether visual properties reference tokens or use hardcoded values. For Web, check CSS/Tailwind for hardcoded hex `#` values against the token system. For iOS, check for hardcoded Color literals instead of asset catalog references. For Android, check for hardcoded `#` values instead of theme attributes.
