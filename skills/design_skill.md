@@ -85,10 +85,17 @@ Only needed when you are writing code. Before generating UI code, write a lightw
 
 - **States**: default, loading, empty, error, disabled, long text, dark mode, reduced motion
 - **Component sources**: design system components or new ones? If new, why?
-- **Copy**: button labels, error messages, empty states — exact text, not placeholders
+- **Copy**: button labels, error messages, empty states — exact text, not placeholders. Follow the UX Copy rubric below.
 - **Platform behaviors**: safe area (iOS), back handling (Android), focus order (Web), Dynamic Type / font scale
 - **Edge cases**: minimum content, maximum content, no network, no permission
 - **Acceptance screenshots**: which screens must be captured after implementation
+
+#### Principles
+
+- **Don't assume.** If it's not specified, the developer will guess. Specify everything: states, edge cases, responsive behavior, token usage. If you haven't written it down, it doesn't exist.
+- **Use tokens, not values.** Reference design tokens (colors, spacing, typography) rather than hardcoded values. This keeps the contract consistent with the design system and enables automated QA.
+- **Show all states.** Default is not enough. Cover hover, active, disabled, loading, error, empty, and long-text states for every interactive component.
+- **Describe the why.** "This collapses on mobile because users primarily use one-handed" helps downstream agents make good judgment calls when adapting the design.
 
 This contract is the yardstick you'll use in QA. If you skip it, QA has nothing to measure against.
 
@@ -123,6 +130,33 @@ After the task, write down one reusable design judgment learned or reinforced. F
 Example: "Empty states that say 'No items yet' without explaining what an item is or how to create one leave the user stuck. Always include a creation path."
 
 Accumulate these in `docs/working.md` or `rules/design/anti_examples.md`.
+
+## UX Copy
+
+When writing or reviewing interface copy, use these patterns.
+
+**CTAs.** Start with a verb ("Start free trial," "Save changes"). Be specific about the action's outcome ("Create account" not "Submit"). The button label must match what actually happens — no mismatch between label and result.
+
+**Error messages.** Three-part structure: What happened + Why + How to fix. Example: "Payment declined. Your card was declined by your bank. Try a different card or contact your bank."
+
+**Empty states.** Three-part structure: What this is + Why it's empty + How to start. Example: "No projects yet. Create your first project to start collaborating with your team."
+
+**Confirmation dialogs.** Make the action visible in the dialog title: "Delete 3 files?" not "Are you sure?" Describe consequences: "This can't be undone." Label buttons with the action ("Delete files" / "Keep files") rather than generic labels ("OK" / "Cancel").
+
+**Voice and tone.** Adapt to context:
+- Success: confirm without exaggeration
+- Error: empathetic and specific — explain what the user should do, not just what went wrong
+- Warning: clear and actionable — describe why it matters and what the user can do
+- Neutral: informative and concise — no filler, no jargon
+
+**Localization awareness.** Avoid idioms, culturally specific metaphors, and ambiguous pronouns. Keep strings under the platform's typical character limit for each element type. English strings should stay short enough to allow 30% expansion in translation.
+
+## Related sub-skills
+
+These files extend the root skill with specialized judgment frameworks. Load them on demand when the task matches their scope. They are plain-text reference files — treat them as you would any documentation file in the project.
+
+- `design_critique.md` — structured design critique with severity-graded findings. Load when the user asks for a detailed design review or when the root skill's QA step reveals issues needing deeper analysis.
+- `design_system.md` — design system audit (token coverage, component states, naming consistency, hardcoded values). Load when the user asks to check design system compliance or when refactoring visual consistency across screens.
 
 ## Platform routing
 

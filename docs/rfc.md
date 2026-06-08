@@ -30,12 +30,14 @@ When tools are unavailable (no Xcode, no Android SDK, no browser automation), th
 
 ## Architecture
 
-### File Layout (MVP)
+### File Layout
 
 ```
 design_skill/
 └── skills/
-    └── design_skill.md    ← the only artifact consumed at runtime
+    ├── design_skill.md     ← root skill (~190 lines, consumed at runtime)
+    ├── design_critique.md   ← sub-skill: structured critique reference
+    └── design_system.md     ← sub-skill: design system audit reference
 ```
 
 The skill file has four sections:
@@ -136,7 +138,9 @@ Candidates for future sub-skills, in priority order:
 
 ### Single file vs skill family
 
-**Chosen: single file.** A skill family (root + sub-skills) is the right long-term architecture, but extracting sub-skills too early creates abstraction debt — interfaces that don't earn their context cost. The single-file approach forces discipline: every line in the root skill must justify its existence in the context window. If a section grows beyond ~30 lines, it's a candidate for extraction — but only after real usage confirms the pattern.
+**Chosen: single root with on-demand sub-skills.** The root skill (~190 lines) defines the review loop, stop conditions, UX copy rubric, platform routing, and quality gates. Specialized judgment frameworks (design critique, design system audit) live as separate plain-text reference files loaded on demand. This keeps the root skill focused while allowing sub-skills to provide depth when needed.
+
+Sub-skills were extracted when the judgment dimension had clear scope boundaries and enough content (~50 lines) to noticeably pollute the root skill. The extraction is conservative: only two sub-skills exist (critique and design system), and they are plain-text files — not secondary entry points. The root skill explicitly lists when to load each one.
 
 ### Platform-agnostic vs platform-specific
 
