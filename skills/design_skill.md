@@ -39,7 +39,7 @@ If the user insists on visual-only, proceed with aesthetic direction and visual 
 
 **Design QA** — user wants to check an existing implementation before shipping.
 
-→ Start with evidence-based QA (step 5 of the review loop). If QA reveals structural issues, work backward to intent and critique.
+→ Start with evidence-based QA (step 6 of the review loop). If QA reveals structural issues, work backward to intent and critique.
 
 **Unclear or vague** — user says "improve the UX" or "make it better" without specifying what's wrong.
 
@@ -81,7 +81,21 @@ Gather what already exists before suggesting anything new. Check these sources i
 
 Degrade gracefully: if none of these exist, acknowledge it and proceed with heuristic judgment. Say "no design artifacts found — these observations are directional."
 
-### 3. Aesthetic direction
+### 3. User uncertainty inventory
+
+Before judging aesthetics, list what a first-time user must infer in order to complete the primary task. This is where many polished interfaces fail: they reduce visual noise while increasing cognitive work.
+
+For the current screen or flow, answer these questions:
+
+- **Identity and access**: Does the user know whether this product is for them, what account or entitlement is required, and what happens if they lack access?
+- **Action sequence**: Does the user know what to do first, what happens after the action, and when the task is complete?
+- **Primary output**: Does the user know where the value appears? In a voice transcription tool, the recording is input; the transcript is the user's output. In an editor, the saved document is the output. Do not let feedback chrome displace the actual work product.
+- **Safety and recovery**: Does the user know whether their work is saved, whether an in-progress action can be interrupted, and how to recover from network, permission, quota, or validation failures?
+- **Cost or limits**: If quotas, trials, or destructive limits exist, are they understandable without turning the main task into an accounting dashboard?
+
+Turn this into concrete design pressure. If a user must guess three or more rules before taking the primary action, the flow needs onboarding copy, stronger state labels, progressive disclosure, or fewer visible controls. Hidden rules are UX debt even when the screen looks clean.
+
+### 4. Aesthetic direction
 
 Do not default to the AI mean (Inter, purple gradients, centered hero, card grid, white background). Pick a conceptual direction that serves the product intent, then make every visual choice serve it.
 
@@ -104,7 +118,7 @@ The direction still has two parts:
 
 This is not about being creative. It's about preventing regression to the mean. The model's default instinct is consensus design. The direction is the reason not to take the default.
 
-### 4. Implementation contract
+### 5. Implementation contract
 
 Only needed when you are writing code. Before generating UI code, write a lightweight contract covering:
 
@@ -124,7 +138,7 @@ Only needed when you are writing code. Before generating UI code, write a lightw
 
 This contract is the yardstick you'll use in QA. If you skip it, QA has nothing to measure against.
 
-### 5. Evidence-based QA
+### 6. Evidence-based QA
 
 After implementation (or when reviewing existing UI), produce real evidence:
 
@@ -133,6 +147,8 @@ After implementation (or when reviewing existing UI), produce real evidence:
 3. Then apply model judgment, comparing each screen to the design intent and contract:
 
 **Information hierarchy.** Shrink the screenshot to 50%. What draws the eye first? Is it the primary interactive element (text field, main action, core content), or is it metadata, chrome, or decoration? The visual anchor must be what the user needs to act on. Secondary information — timestamps, voiceprint indicators, word counts, settings — must not compete with the primary task surface. If the user cannot identify the main action in under one second, the hierarchy is wrong.
+
+**Cognitive burden.** Write down the rules a first-time user must infer from this screen. What is this product for? What should I do first? What will I get? Is my work safe? What happens if access, quota, network, or permissions fail? If the interface assumes the user already knows these answers, add copy, state feedback, progressive disclosure, or simplify the visible controls. A quiet UI that leaves users guessing is not simpler; it has moved complexity into the user's head.
 
 **Empty states.** An empty text field, an empty list, an empty canvas — these are not blank space. They are the product's first impression. An empty state must answer three questions: what is this, why is it empty, and what should the user do next. An empty recording screen that shows only a waveform without explaining how to start recording has failed. An empty text field without a placeholder that teaches what to type has failed. Empty states that are beautiful but silent are worse than plain ones that teach.
 
@@ -144,7 +160,7 @@ Tools that can be used: `xcrun simctl screenshot`, `adb shell screencap`, Playwr
 
 If tools are unavailable, do manual visual inspection and label the output accordingly.
 
-### 6. Capture one lesson
+### 7. Capture one lesson
 
 After the task, write down one reusable design judgment learned or reinforced. Format:
 
