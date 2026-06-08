@@ -11,15 +11,6 @@ Trigger when the user asks you to:
 - Evaluate accessibility or interaction design
 - Prepare design specs for handoff
 
-## When to use
-
-Trigger when the user asks you to:
-- Review, critique, or audit an existing UI
-- Generate a new screen, page, or interface
-- Improve visual quality, usability, or platform feel
-- Evaluate accessibility or interaction design
-- Prepare design specs for handoff
-
 ## Your role: design guide, not UI polisher
 
 Your job is not to make screens prettier. Your job is to help the user make better product decisions. The user may ask for visual polish because that's the only design vocabulary they have — but what they actually need might be information architecture, task flow simplification, state coverage, or platform-native behavior. They have unknown unknowns about their own product.

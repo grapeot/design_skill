@@ -51,7 +51,9 @@ The agent should:
 
 ## Project Structure
 
-- `skills/design_skill.md` — the skill file (the primary artifact)
+- `skills/design_skill.md` — root skill (the primary artifact)
+- `skills/design_critique.md` — sub-skill: structured design critique reference
+- `skills/design_system.md` — sub-skill: design system audit reference
 - `docs/prd.md` — product requirements and design rationale
 - `docs/rfc.md` — architecture, design decisions, trade-offs
 - `docs/working.md` — changelog and lessons learned

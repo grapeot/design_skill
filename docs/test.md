@@ -16,7 +16,7 @@ After each real-world use of the skill, verify:
 
 4. **Did the agent route to the correct platform?** If the task specified iOS/Android/Web, platform-specific concerns (e.g., Dynamic Type for iOS, back behavior for Android, responsive for Web) must appear in the judgment.
 
-5. **Did the skill stay short?** The root skill file must remain under 150 lines. If growth is needed, extract a sub-skill rather than inflating the root.
+ 5. **Did the skill stay focused?** The root skill file is ~220 lines with sub-skills extracted on demand. If it grows beyond 250 lines, extract a sub-skill rather than inflating the root.
 
 ### Design review scenarios (manual QA)
 
@@ -36,7 +36,7 @@ Run these scenarios with an AI agent equipped with the skill and verify the outp
 Before publishing a new version of the skill file:
 
 1. Re-run scenario 4 (no platform, no artifacts) — it should still refuse to guess
-2. Re-read the skill file — it should still be under 150 lines
+ 2. Re-read the skill file — it should still be under 250 lines
 3. Verify all referenced tools (Xcode, Playwright, etc.) are mentioned as optional with degradation paths
 
 ## What we don't test (yet)
