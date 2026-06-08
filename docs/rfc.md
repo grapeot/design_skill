@@ -18,7 +18,7 @@ The model already knows design principles (contrast, hierarchy, consistency, acc
 
 ### 3. Progressive disclosure
 
-The root skill (~120 lines) defines the judgment loop and routing rules. Platform-specific rules (iOS HIG, Material Design, Web accessibility), anti-examples, and tool references live in separate files. The agent loads them only when the task requires a specific platform or judgment dimension.
+The root skill (~220 lines) defines the agent's role, the Phase 0 request classifier, the judgment loop, UX copy rubric, and routing rules. Platform-specific rules (iOS HIG, Material Design, Web accessibility), anti-examples, and tool references live in separate files. The agent loads them only when the task requires a specific platform or judgment dimension.
 
 ### 4. Deterministic tools supply facts, model supplies judgment
 
@@ -40,12 +40,17 @@ design_skill/
     └── design_system.md     ← sub-skill: design system audit reference
 ```
 
-The skill file has four sections:
+The skill file has these sections:
 
-1. **When to use** — trigger conditions and stop/refusal conditions
-2. **The design review loop** — the six-step cycle
-3. **Platform routing** — how to find and load platform-specific rules
-4. **Quality gates** — what must be true before the agent can claim "done"
+1. **When to use** — trigger conditions
+2. **Your role** — agent as design guide, not UI polisher
+3. **Phase 0** — request classification (visual polish, UX redesign, new feature, design QA, unclear)
+4. **Stop conditions** — when to refuse or degrade
+5. **The design review loop** — the six-step cycle
+6. **UX Copy** — inline rubric for CTAs, errors, empty states, confirmation dialogs, tone
+7. **Related sub-skills** — pointers to design_critique.md and design_system.md
+8. **Platform routing** — how to find and load platform-specific rules
+9. **Quality gates** — what must be true before the agent can claim "done"
 
 ### The Design Review Loop
 
@@ -123,9 +128,7 @@ A sub-skill should be extracted from the root only when all three conditions are
 3. There is a clear, non-overlapping scope (e.g., "accessibility audit" vs "visual hierarchy critique")
 
 Candidates for future sub-skills, in priority order:
-1. `ui_design_accessibility.md` — WCAG/iOS/Android accessibility audit with tool references
-2. `ui_design_ux_copy.md` — microcopy, error states, confirmation dialogs, permission requests
-3. `ui_design_anti_examples.md` — catalog of real failure patterns with before/after
+1. `ui_design_anti_examples.md` — catalog of real failure patterns with before/after
 
 ### What should NOT become a sub-skill
 
@@ -138,7 +141,7 @@ Candidates for future sub-skills, in priority order:
 
 ### Single file vs skill family
 
-**Chosen: single root with on-demand sub-skills.** The root skill (~190 lines) defines the review loop, stop conditions, UX copy rubric, platform routing, and quality gates. Specialized judgment frameworks (design critique, design system audit) live as separate plain-text reference files loaded on demand. This keeps the root skill focused while allowing sub-skills to provide depth when needed.
+**Chosen: single root with on-demand sub-skills.** The root skill (~220 lines) defines the agent role, Phase 0 request classifier, review loop, stop conditions, UX copy rubric, platform routing, and quality gates. Specialized judgment frameworks (design critique, design system audit) live as separate plain-text reference files loaded on demand. This keeps the root skill focused while allowing sub-skills to provide depth when needed.
 
 Sub-skills were extracted when the judgment dimension had clear scope boundaries and enough content (~50 lines) to noticeably pollute the root skill. The extraction is conservative: only two sub-skills exist (critique and design system), and they are plain-text files — not secondary entry points. The root skill explicitly lists when to load each one.
 

@@ -23,8 +23,8 @@ The problem for everyone else: AI agents can make UI, but they can't reliably ju
 1. An agent equipped with this skill produces a design critique that a human designer would recognize as structured, specific, and actionable — not a generic "looks nice" or a vague checklist
 2. The skill works across iOS, Android, and Web without requiring platform-specific reconfiguration
 3. The skill fails gracefully: when artifacts (screenshots, builds) are unavailable, it acknowledges the limit and gives directional guidance rather than pretending certainty
-4. The skill stays short enough to not pollute context (~120 lines for the root skill)
-5. A new user can install the skill by telling their AI agent one sentence
+ 4. The root skill stays under ~220 lines, with specialized judgment frameworks extracted into on-demand sub-skills
+ 5. A new user can install the skill by telling their AI agent one sentence
 
 ## Non-Goals
 
@@ -55,14 +55,16 @@ The problem for everyone else: AI agents can make UI, but they can't reliably ju
 
 5. **Explicit stop conditions.** Our skill defines when the agent should refuse to make a design judgment: no artifacts available, no target platform identified, destructive operations involved, or no clear success criterion. Anthropic's plugins assume the user knows when to stop.
 
-## MVP Scope
+## Scope
 
-The MVP is a single skill file (`skills/design_skill.md`, ~120 lines) that defines:
+The root skill (`skills/design_skill.md`, ~220 lines) defines:
 
-1. A design review loop: intent → context pull → aesthetic direction → implementation contract → evidence-based QA → lesson capture
-2. An evaluation-first entry: before producing or judging UI, the agent must articulate what success looks like for this specific task
-3. Platform routing that points to platform-specific rules without bundling them
-4. Stop/refusal conditions that prevent the agent from pretending certainty without evidence
-5. A mandate to verify with real artifacts (screenshots, builds, accessibility scans) rather than matching pixels against a mental template
+1. A Phase 0 request classifier that determines the type of design work needed before entering the review loop
+2. A design review loop: design intent → context pull → aesthetic direction → implementation contract → evidence-based QA → lesson capture
+3. An evaluation-first entry: before producing or judging UI, the agent must articulate what success looks like for this specific task
+4. Platform routing that points to platform-specific rules without bundling them
+5. Stop/refusal conditions that prevent the agent from pretending certainty without evidence
+6. A UX Copy rubric for CTAs, error messages, empty states, confirmation dialogs, and tone
+7. A mandate to verify with real artifacts (screenshots, builds, accessibility scans) rather than matching pixels against a mental template
 
-Future versions may add platform-specific reference files, an anti-example catalog, and sub-skills for accessibility audit and UX copy — but only after real usage reveals which of these are worth extracting from the root skill.
+Specialized judgment frameworks (design critique, design system audit) are extracted into sub-skills loaded on demand via progressive disclosure.
