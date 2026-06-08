@@ -16,6 +16,12 @@
 - Added Phase 0 request classification: agent as design guide, not UI polisher. Five categories with specific responses.
 - Merged via PR #3
 
+--- 2026-06-08
+
+- Updated installation guidance for the multi-file skill family: install the repo or complete `skills/` directory, expose only the root skill, and do not symlink `design_skill.md` alone.
+- Added `frontend_design.md` as an on-demand sub-skill for distinctive Web/frontend aesthetic direction, adapted from Anthropic's Frontend Design Plugin spirit while preserving the root skill's evaluation-first flow.
+- Updated README, AGENTS, RFC, and root skill routing to reflect the new sub-skill.
+
 ## Lessons Learned
 
 _(to be populated as the skill is used in real tasks)_

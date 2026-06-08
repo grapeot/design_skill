@@ -19,12 +19,12 @@ Inspired by Anthropic's [Design Plugin](https://github.com/anthropics/knowledge-
 design_skill/
 ├── AGENTS.md              ← this file
 ├── .gitignore
-├── .env.example
 ├── README.md              ← public-facing readme
 ├── skills/
-│   ├── design_skill.md    ← root skill (~190 lines, the primary artifact)
+│   ├── design_skill.md    ← root skill (~250 lines, the primary artifact)
 │   ├── design_critique.md ← sub-skill: structured design critique reference
-│   └── design_system.md   ← sub-skill: design system audit reference
+│   ├── design_system.md   ← sub-skill: design system audit reference
+│   └── frontend_design.md ← sub-skill: Web/frontend aesthetic direction
 ├── docs/
 │   ├── prd.md             ← product requirements: what, who, why
 │   ├── rfc.md             ← architecture, design decisions, trade-offs
@@ -35,8 +35,8 @@ design_skill/
 ## Critical Constraints
 
 1. **This is a public repo.** All files must use only fake examples. No real emails, API keys, internal paths, 1Password vault references, or private data.
-2. **The root skill is the primary artifact.** Everything else exists to explain, justify, and maintain the skill. The root skill file itself should stay under ~200 lines. Do not inflate it — use sub-skills for specialized content.
-3. **Sub-skills are loaded on demand.** Sub-skills (`design_critique.md`, `design_system.md`) are plain-text reference files, not secondary entry points. The root skill routes to them; agents load them only when the task matches their scope.
+2. **The root skill is the primary artifact.** Everything else exists to explain, justify, and maintain the skill. The root skill file itself should stay compact. Do not inflate it — use sub-skills for specialized content.
+3. **Sub-skills are loaded on demand.** Sub-skills (`design_critique.md`, `design_system.md`, `frontend_design.md`) are plain-text reference files, not secondary entry points. The root skill routes to them; agents load them only when the task matches their scope.
 4. **English only.** All docs, code comments, and the skill file itself are in English.
 5. **Working.md discipline.** After every change, append to `docs/working.md` — a dated changelog entry plus any lessons learned.
 
