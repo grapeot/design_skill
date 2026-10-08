@@ -26,6 +26,23 @@
 
 - Folded selected product-designer practitioner judgments into the public skill family without exposing internal persona machinery: work-class framing, success criteria triangulation, reference discipline, deletion pressure, hidden implementation surface, validation signals, critique layering, and design-system governance.
 
+--- 2026-10-07
+
+- Absorbed Anthropic's latest design guidance (all sources fetched and verified upstream 2026-10-07). Rebased onto the then-current master, which already carried `frontend_design.md` and the practitioner-judgment pass, so this entry only covers what was still missing:
+  - Root `design_skill.md` §4: added subject-matter grounding (name the concrete subject, audience, and primary job before choosing a direction).
+  - Root §5 (Implementation contract): added responsive behavior and motion to the contract list; clarified the handoff spec-sheet structure for specs consumed by another engineer.
+  - Root §6 (Evidence-based QA): added "separate observation from interpretation."
+  - Root References + intro: added Agent Skills `frontend-design`, the Frontend Aesthetics cookbook, and WCAG 2.1 AA; tagged per-item source attribution.
+  - `frontend_design.md`: added Anthropic's current-defaults calibration catalog, the type/line-length/structural-device rules, and a "plan, then defend it against the brief" + "spend boldness in one place" section.
+  - `design_critique.md`: expanded the accessibility dimension with the WCAG 2.1 AA criterion list, common issues, and the automated→manual testing approach.
+  - `design_system.md`: added the tokens/components/patterns model, system principles, a motion token row, and component document/extend templates.
+  - `README.md`: listed the newer Anthropic sources and the calibration/WCAG ideas.
+
 ## Lessons Learned
 
-_(to be populated as the skill is used in real tasks)_
+- **Distinguish first-party Anthropic content from third-party retellings.** Three official sources matter and differ: the Cowork `design` plugin (six workflow skills, Figma/MCP-oriented), the `claude-code` frontend-design plugin, and the newer `anthropics/skills` repo. The `anthropics/skills` `frontend-design` SKILL.md was the freshest (2026-09) and is byte-identical to the `claude-code` copy; the Cowork design plugin was last touched 2026-09.
+- **Check origin before starting.** A parallel change had already landed `frontend_design.md` and the practitioner-judgment pass on master. Starting from a stale local checkout would have duplicated the frontend aesthetic work and conflicted. Rebase first, then only add what is still missing.
+- **Our skill is stronger in scope and weaker in specifics.** We already cover multi-platform, an evaluation-first flow, stop conditions, and an uncertainty inventory that Anthropic's skills do not. Anthropic's advantage is specific, checkable calibration (named default traits, WCAG criterion numbers, handoff and system templates). Absorption should move specifics in without diluting our structure.
+- **The "AI default" warning needs updating, not just repeating.** The original "advanced UI consensus" framing (dark glass, bold type) is still true but dated; Anthropic now catalogs warmer, more current clusters (cream + terracotta serif, SaaS card kit, template chrome). Concrete catalogs age better than adjectives.
+- **Root length is a real constraint.** The root skill is ~275 lines; the repo already softened its earlier ~200-line target to "stay compact." Further specialized absorption should go into a sub-skill rather than the root.
+- **Scope discipline on research skills.** We deliberately did not absorb Anthropic's `user-research` / `research-synthesis` skills; our artifact is UI design judgment, not a product-research program. The one transferable idea (separate observations from interpretations) was folded into the QA step.

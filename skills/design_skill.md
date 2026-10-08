@@ -1,6 +1,6 @@
 # UI Design Judgment
 
-Give AI coding agents a structured framework for evaluating, critiquing, and improving user interfaces across iOS, Android, and Web. Inspired by Anthropic's open-source [Design Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/design) and [Frontend Design Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design), re-architected for multi-platform, filesystem-native, evaluation-first workflows.
+Give AI coding agents a structured framework for evaluating, critiquing, and improving user interfaces across iOS, Android, and Web. Inspired by Anthropic's open-source [Design Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/design), [Frontend Design Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design), and the current [Agent Skills `frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design), re-architected for multi-platform, filesystem-native, evaluation-first workflows.
 
 ## When to use
 
@@ -119,6 +119,8 @@ Do not default to the AI mean (Inter, purple gradients, centered hero, card grid
 
 If this is a Web/frontend implementation task, load `frontend_design.md` at this step. Use it to turn the broad conceptual direction into concrete choices for typography, color, motion, spatial composition, background detail, and responsive production checks.
 
+**Ground the direction in the subject matter first.** Before choosing a direction, name one concrete subject, its audience, and the screen's single primary job — propose them if the brief doesn't say. Distinctive choices come from the subject's own world: its materials, instruments, artifacts, and vernacular. A field recorder for journalists and a dashboard for financial analysts should not share an aesthetic. Build with the brief's real content throughout; copy is part of the design, not filler.
+
 **Avoid the "advanced UI" consensus.** AI design tools have a recognizable default aesthetic: dark backgrounds with glass morphism, bold oversized typography, dramatic spacing, high-contrast accent colors. This reads as sophisticated on first impression, and an AI agent left to its own defaults will reliably produce it. Do not mistake this for good design. This aesthetic is a local maximum — it reliably sacrifices information density, task clarity, platform native feel, and accessibility for visual impact. A recording app dressed in this style looks like a tech demo, not a tool you'd trust with your data.
 
 **Use physical product analogy to anchor direction.** Rather than chasing abstract adjectives ("modern," "clean," "elegant"), ground the interface in a familiar physical product whose functional priorities match yours. Examples:
@@ -148,6 +150,8 @@ Only needed when you are writing code. Before generating UI code, write a lightw
 - **Component sources**: design system components or new ones? If new, why?
 - **Copy**: button labels, error messages, empty states — exact text, not placeholders. Follow the UX Copy rubric below.
 - **Platform behaviors**: safe area (iOS), back handling (Android), focus order (Web), Dynamic Type / font scale
+- **Responsive behavior**: the breakpoints and what changes at each, including how layouts collapse
+- **Motion**: for each animated element, its trigger, animation, duration, and easing; confirm reduced-motion behavior
 - **Edge cases**: minimum content, maximum content, no network, no permission
 - **Acceptance screenshots**: which screens must be captured after implementation
 
@@ -159,7 +163,7 @@ Only needed when you are writing code. Before generating UI code, write a lightw
 - **Describe the why.** "This collapses on mobile because users primarily use one-handed" helps downstream agents make good judgment calls when adapting the design.
 - **Estimate hidden implementation surface.** Visible size is a poor cost proxy. Call out new states, dependencies, input modes, performance requirements, accessibility obligations, QA matrix, ownership boundaries, and release risk.
 
-This contract is the yardstick you'll use in QA. If you skip it, QA has nothing to measure against.
+This contract is the yardstick you'll use in QA. If you skip it, QA has nothing to measure against. When the spec is handed to another engineer rather than consumed by you, keep the same substance but organize it as a spec sheet they can work from: overview; layout; tokens used; components; states and interactions; responsive behavior; edge cases; motion; accessibility notes.
 
 ### 6. Evidence-based QA
 
@@ -180,6 +184,8 @@ After implementation (or when reviewing existing UI), produce real evidence:
 **Deletion pressure.** Every added element needs a reason to survive. Ask: what would users complain about within seven days if this were removed? What could disappear for a month without anyone noticing? What is the cheapest thing to kill while preserving the intent? Simplicity is not fewer pixels; it is less unsupported responsibility.
 
 **Platform native feel.** Does this screen feel like it belongs on its platform, or does it feel like a WebView pretending to be native? On iOS, does it respect the navigation bar, swipe-back, and Dynamic Type? On Android, does it respect the back gesture, system bars, and density? On Web, does it handle keyboard navigation, focus order, and responsive breakpoints correctly?
+
+**Separate observation from interpretation.** "5 of 8 users tapped the wrong control" is an observation; "the control is confusing" is an interpretation. State what is visible, then label the inference, so the finding can be checked rather than trusted.
 
 Tools that can be used: `xcrun simctl screenshot`, `adb shell screencap`, Playwright, axe-core, Lighthouse, Accessibility Inspector, manual visual inspection.
 
@@ -256,8 +262,11 @@ Before presenting a design judgment as complete, verify:
 
 ## References
 
-This skill draws on and acknowledges:
-- Anthropic's [Design Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/design) — the original six-skill decomposition (critique, design-system, handoff, ux-copy, accessibility, research-synthesis)
-- Anthropic's [Frontend Design Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) — aesthetic direction via conceptual commitment
+This skill draws on and acknowledges (Anthropic sources verified against the upstream repos as of 2026-10):
+
+- Anthropic's [Design Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/design) — the six-skill decomposition (critique, design-system, handoff, ux-copy, accessibility, user-research/research-synthesis). Source for the WCAG 2.1 AA criterion list, the design-system document/extend templates, and the handoff spec structure.
+- Anthropic's [Frontend Design Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) and the current [Agent Skills `frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design) (updated 2026-09) — aesthetic direction via subject grounding, the current-defaults calibration catalog, the type/motion/structure rules, and the two-pass plan-then-review process.
+- Anthropic's [Frontend Aesthetics: A Prompting Guide](https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb) — the distilled aesthetics prompt: guide specific dimensions, reference inspirations, and explicitly call out common defaults.
+- [WCAG 2.1 AA success criteria](https://www.w3.org/TR/WCAG21/) (W3C) — the accessibility checks referenced in `design_critique.md`.
 - [Evaluation-first methodology](https://yage.ai/share/cursor-agent-harness-evaluation-first-20260501.html) — defining success criteria before building
 - [Thin Harness, Fat Skills](https://yage.ai/share/thin-harness-fat-skills-20260414.html) — keeping runtime minimal, loading domain knowledge on demand

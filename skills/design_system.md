@@ -18,6 +18,21 @@ Loaded on demand from the root `design_skill.md`. Not intended to be loaded stan
 - The design system reference: DESIGN.md, token definitions, or a link to the token spec
 - Platform: iOS, Android, or Web (affects token naming conventions and tooling)
 
+## What a design system is made of
+
+A design system has three layers, and an audit should say which layer each finding belongs to:
+
+- **Tokens** — the atomic values: color (brand, semantic, neutral), typography (scale, weights, line heights), spacing, borders (radius, width), shadows (elevation), and motion (durations, easings).
+- **Components** — reusable elements with defined variants (primary, secondary, ghost), states (default, hover, active, disabled, loading, error), sizes, behavior, and accessibility (ARIA, keyboard).
+- **Patterns** — common solutions built from components: forms, navigation, data display, feedback.
+
+## Principles
+
+1. **Consistency over creativity** — the system exists so teams stop reinventing the wheel.
+2. **Flexibility within constraints** — components compose; they are not rigid templates.
+3. **Document everything** — if it is not documented, it does not exist.
+4. **Version and migrate** — breaking changes need a migration path, not a silent swap.
+
 ## Audit dimensions
 
 ### 0. System vs one-off decision
@@ -38,6 +53,7 @@ Check whether visual properties reference tokens or use hardcoded values. For We
 | Colors | 12 defined tokens | 7 hardcoded hex values | Low consistency |
 | Spacing | 8 tokens | 23 hardcoded px values | Rules may be broken |
 | Typography | 6 tokens | 3 inline font declarations | Minor |
+| Motion | 3 duration/easing tokens | transition values written inline per component | Animation is not systematized |
 
 ### 2. Naming consistency
 
@@ -68,6 +84,71 @@ Common patterns should follow the same visual rules across the UI. Check for:
 - Are all CTAs consistently positioned in similar layouts?
 - Do similar form layouts use the same spacing and alignment?
 - Are error states visually consistent across different features?
+
+## Documenting a component
+
+When the task is to document rather than audit, produce a spec another engineer can use without guessing:
+
+```markdown
+## Component: [Name]
+
+### Description
+[What it is and when to use it]
+
+### Variants
+| Variant | Use when |
+|---------|----------|
+| [Primary] | [Main actions] |
+| [Secondary] | [Supporting actions] |
+
+### Props / Properties
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| [prop] | [type] | [default] | [description] |
+
+### States
+| State | Visual | Behavior |
+|-------|--------|----------|
+| Default / Hover / Active / Disabled / Loading / Error | [description] | [interaction] |
+
+### Tokens used
+- Colors: [which tokens] · Spacing: [which tokens] · Typography: [which tokens] · Motion: [which tokens]
+
+### Accessibility
+- **Role**: [ARIA role] · **Keyboard**: [Tab/Enter/Escape behavior] · **Screen reader**: [announced as]
+
+### Do's and don'ts
+| Do | Don't |
+|----|-------|
+| [Best practice] | [Anti-pattern] |
+```
+
+## Extending the system
+
+When the task is to add a component or pattern, justify it against what already exists before proposing it:
+
+```markdown
+## New component: [Name]
+
+### Problem
+[The user need or gap this addresses]
+
+### Existing patterns
+| Related component | What's shared | Why it isn't enough |
+|-------------------|---------------|---------------------|
+| [Component] | [Overlap] | [Gap] |
+
+### Proposed design
+[API/props, variants, states, tokens used]
+
+### Accessibility
+[Role, keyboard, screen reader]
+
+### Open questions
+[Decisions that still need review; edge cases to resolve]
+```
+
+Prefer coverage over perfection: 80% of components documented beats 100% of ten components.
 
 ## Output format
 
