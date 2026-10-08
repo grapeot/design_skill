@@ -21,7 +21,7 @@ design_skill/
 ├── .gitignore
 ├── README.md              ← public-facing readme
 ├── skills/
-│   ├── design_skill.md    ← root skill (~250 lines, the primary artifact)
+│   ├── design_skill.md    ← root skill (~275 lines, the primary artifact)
 │   ├── design_critique.md ← sub-skill: structured design critique reference
 │   ├── design_system.md   ← sub-skill: design system audit reference
 │   └── frontend_design.md ← sub-skill: Web/frontend aesthetic direction

@@ -48,7 +48,31 @@ Does this screen follow the platform's interaction model? iOS screens should nav
 
 ### 5. Accessibility
 
-Minimum checks: color contrast ratios (4.5:1 for normal text, 3:1 for large), touch target sizes (44pt on iOS, 48dp on Android), keyboard navigation (Web), visible focus indicators, text readability at the platform's default font size.
+Check against WCAG 2.1 AA and cite the specific success criterion for each finding.
+
+**Perceivable**
+- 1.1.1 Non-text content has a text alternative
+- 1.3.1 Information and structure are conveyed semantically
+- 1.4.3 Contrast ratio ≥ 4.5:1 (normal text), ≥ 3:1 (large text)
+- 1.4.11 Non-text contrast ≥ 3:1 for UI components and graphics
+
+**Operable**
+- 2.1.1 All functionality is available from a keyboard
+- 2.4.3 Logical focus order
+- 2.4.7 Visible focus indicator
+- 2.5.5 Touch target ≥ 44×44 CSS pixels (44pt on iOS, 48dp on Android)
+
+**Understandable**
+- 3.2.1 Predictable on focus — no unexpected context changes
+- 3.3.1 Errors are identified and described
+- 3.3.2 Labels or instructions are provided for inputs
+
+**Robust**
+- 4.1.2 Name, role, and value are exposed for all UI components
+
+Common issues to scan for: insufficient color contrast; missing form labels; interactive elements unreachable by keyboard; missing alt text on meaningful images; focus traps in modals; missing ARIA landmarks; media that autoplays without controls; time limits with no extension.
+
+Testing approach: automated scan first (it catches roughly 30% of issues), then keyboard-only navigation, screen-reader testing (VoiceOver, NVDA), contrast verification, and zoom to 200% to confirm the layout does not break. Automated results are a floor, not a certificate — accessibility conformance still requires manual testing with real assistive technology.
 
 ## How to give feedback
 

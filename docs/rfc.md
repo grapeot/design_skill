@@ -18,7 +18,7 @@ The model already knows design principles (contrast, hierarchy, consistency, acc
 
 ### 3. Progressive disclosure
 
-The root skill (~220 lines) defines the agent's role, the Phase 0 request classifier, the judgment loop, UX copy rubric, and routing rules. Platform-specific rules (iOS HIG, Material Design, Web accessibility), anti-examples, and tool references live in separate files. The agent loads them only when the task requires a specific platform or judgment dimension.
+The root skill (~275 lines) defines the agent's role, the Phase 0 request classifier, the judgment loop, UX copy rubric, and routing rules. Platform-specific rules (iOS HIG, Material Design, Web accessibility), anti-examples, and tool references live in separate files. The agent loads them only when the task requires a specific platform or judgment dimension.
 
 ### 4. Deterministic tools supply facts, model supplies judgment
 
@@ -35,7 +35,7 @@ When tools are unavailable (no Xcode, no Android SDK, no browser automation), th
 ```
 design_skill/
 └── skills/
-    ├── design_skill.md     ← root skill (~240 lines, consumed at runtime)
+    ├── design_skill.md     ← root skill (~275 lines, consumed at runtime)
     ├── design_critique.md   ← sub-skill: structured critique reference
     ├── design_system.md     ← sub-skill: design system audit reference
     └── frontend_design.md   ← sub-skill: Web/frontend aesthetic direction
@@ -142,7 +142,7 @@ Candidates for future sub-skills, in priority order:
 
 ### Single file vs skill family
 
-**Chosen: single root with on-demand sub-skills.** The root skill (~220 lines) defines the agent role, Phase 0 request classifier, review loop, stop conditions, UX copy rubric, platform routing, and quality gates. Specialized judgment frameworks (design critique, design system audit) live as separate plain-text reference files loaded on demand. This keeps the root skill focused while allowing sub-skills to provide depth when needed.
+**Chosen: single root with on-demand sub-skills.** The root skill (~275 lines) defines the agent role, Phase 0 request classifier, review loop, stop conditions, UX copy rubric, platform routing, and quality gates. Specialized judgment frameworks (design critique, design system audit, frontend aesthetic direction) live as separate plain-text reference files loaded on demand. This keeps the root skill focused while allowing sub-skills to provide depth when needed.
 
 Sub-skills are extracted when the judgment dimension has clear scope boundaries and enough content to noticeably pollute the root skill. The extraction is conservative: critique, design system audit, and frontend aesthetic direction are plain-text files, not secondary entry points. The root skill explicitly lists when to load each one.
 

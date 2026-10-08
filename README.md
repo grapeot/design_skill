@@ -15,7 +15,7 @@ A small Markdown skill family that gives AI coding agents a design review loop: 
 
 ## Inspiration
 
-Inspired by Anthropic's open-source [Design Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/design) (design critique, handoff, accessibility, UX copy, design system audit, research synthesis) and [Frontend Design Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) (aesthetic direction). For a detailed analysis of the design philosophy behind these plugins, see [Claude Design Reverse Engineering](https://yage.ai/share/claude-design-reverse-engineering-20260607.html).
+Inspired by Anthropic's open-source [Design Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/design) (design critique, handoff, accessibility, UX copy, design system audit, research synthesis), [Frontend Design Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design), and the current [Agent Skills `frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design) (aesthetic direction). For a detailed analysis of the design philosophy behind these plugins, see [Claude Design Reverse Engineering](https://yage.ai/share/claude-design-reverse-engineering-20260607.html).
 
 Key ideas absorbed:
 
@@ -23,6 +23,8 @@ Key ideas absorbed:
 - **Criteria transfer**: the model already knows design principles — what it needs is the operational structure of critique (first impression → usability → visual hierarchy → consistency → accessibility)
 - **Progressive disclosure**: keep the root skill short; load platform-specific rules and references only when needed
 - **Deterministic tools supply facts, model supplies judgment**: use CLI tools for contrast ratio, touch targets, view hierarchy, accessibility scans; reserve LLM judgment for task coherence, visual emphasis, copy quality
+- **Calibrate against current defaults**: Anthropic's latest frontend-design skill catalogs the specific traits AI-generated design clusters around (warm cream + terracotta serif, SaaS card kit, template chrome) so the agent can name the default it is drifting toward instead of relying on a vague sense of "generic"
+- **WCAG 2.1 AA by criterion**: accessibility findings cite the specific success criterion (1.4.3 contrast, 2.5.5 target size, 4.1.2 name/role/value) rather than a general impression
 
 Key differences from Anthropic's approach:
 
